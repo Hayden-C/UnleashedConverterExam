@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Enter a number in the input box below to see it converted to a english currency representation</p>
+
+    <input id="inputValue" type="number" placeholder="0.00"/>
+    <p id="resultText"></p>
+
+</div>
+
+<script>
+    window.onload = function () {
+        $('#inputValue').change(function () {
+            //Call code behind method and update results view with converted text representation of decimal
+            $.ajax({
+                url: '/?handler=Value',
+                data: {
+                    value: $('#inputValue').val()
+                }
+            })
+            .done(function (result) {
+                $('#resultText').html(result);
+            });
+        });
+    }
+</script>
